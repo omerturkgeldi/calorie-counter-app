@@ -1,6 +1,6 @@
 import React from 'react'
-import FoodForm from '../../../components/Foods/FoodForm'
-import FoodList from '../../../components/Foods/FoodList'
+import FoodForm from '../../components/Foods/FoodForm'
+import FoodList from '../../components/Foods/FoodList'
 
 const Foods = () => {
     return (

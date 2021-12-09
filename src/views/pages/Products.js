@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductForm from '../../../components/Products/ProductForm'
-import ProductList from '../../../components/Products/ProductList'
+import ProductForm from '../../components/Products/ProductForm'
+import ProductList from '../../components/Products/ProductList'
 
 const Products = () => {
     return (

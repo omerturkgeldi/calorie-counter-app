@@ -2,12 +2,12 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 // import Dashboard from '../pages/Dashboard'
-import Foods from "./views/pages/Foods/Foods";
-import Products from "./views/pages/Products/Products";
-import Dashboard from "./views/pages/Dashboard/Dashboard";
-import Daily from "./views/pages/Daily/Daily";
-import Activities from "./views/pages/Activities/Activities";
-import Social from "./views/pages/Social/Social";
+import Foods from "./views/pages/Foods";
+import Products from "./views/pages/Products";
+import Dashboard from "./views/pages/Dashboard";
+import Daily from "./views/pages/Daily";
+import Activities from "./views/pages/Activities";
+import Social from "./views/pages/Social";
 
 const Routes = () => {
   return (
