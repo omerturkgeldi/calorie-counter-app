@@ -61,25 +61,25 @@ const Sidebar = props => {
                                 </span>
                             </Link>
                             <Link to="/yemekler" className="nav_link">
-                                <i className='bx bx-book-alt nav_icon'></i>
+                                <i className='bx bx-food-menu nav_icon'></i>
                                 <span className="nav_name">
                                     Yemekler
                                 </span>
                             </Link>
                             <Link to="/gunluk" className="nav_link">
-                                <i className='bx bx-book-alt nav_icon'></i>
+                                <i className='bx bx-calendar-week nav_icon'></i>
                                 <span className="nav_name">
                                     Günlük 
                                 </span>
                             </Link>
                             <Link to="/aktiviteler" className="nav_link">
-                                <i className='bx bx-book-alt nav_icon'></i>
+                                <i className='bx bx-bolt-circle nav_icon'></i>
                                 <span className="nav_name">
                                     Aktiviteler
                                 </span>
                             </Link>
                             <Link to="/sosyal" className="nav_link">
-                                <i className='bx bx-book-alt nav_icon'></i>
+                                <i className='bx bx-cube-alt nav_icon'></i>
                                 <span className="nav_name">
                                     Sosyal
                                 </span>
