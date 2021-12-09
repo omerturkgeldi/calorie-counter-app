@@ -66,6 +66,24 @@ const Sidebar = props => {
                                     Yemekler
                                 </span>
                             </Link>
+                            <Link to="/gunluk" className="nav_link">
+                                <i className='bx bx-book-alt nav_icon'></i>
+                                <span className="nav_name">
+                                    Günlük 
+                                </span>
+                            </Link>
+                            <Link to="/aktiviteler" className="nav_link">
+                                <i className='bx bx-book-alt nav_icon'></i>
+                                <span className="nav_name">
+                                    Aktiviteler
+                                </span>
+                            </Link>
+                            <Link to="/sosyal" className="nav_link">
+                                <i className='bx bx-book-alt nav_icon'></i>
+                                <span className="nav_name">
+                                    Sosyal
+                                </span>
+                            </Link>
                         </div>
                     </div> <a href="#" className="nav_link"> <i className='bx bx-log-out nav_icon'></i> <span className="nav_name">SignOut</span> </a>
                 </nav>

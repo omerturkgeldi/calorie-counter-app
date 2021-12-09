@@ -5,6 +5,9 @@ import { Switch, Route } from "react-router-dom";
 import Foods from "./views/Foods/Foods";
 import Products from "./views/Products/Products";
 import Dashboard from "./views/Dashboard/Dashboard";
+import Daily from "./views/Daily/Daily";
+import Activities from "./views/Activities/Activities";
+import Social from "./views/Social/Social";
 
 const Routes = () => {
   return (
@@ -12,6 +15,10 @@ const Routes = () => {
       <Route path="/" exact component={Dashboard} />
       <Route path="/urunler" exact component={Products} />
       <Route path="/yemekler" component={Foods} />
+      <Route path="/gunluk" component={Daily} />
+      <Route path="/aktiviteler" component={Activities} />
+      <Route path="/sosyal" component={Social} />
+
     </Switch>
   );
 };
