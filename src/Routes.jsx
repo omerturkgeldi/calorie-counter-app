@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 // import Dashboard from '../pages/Dashboard'
 import Foods from "./views/pages/Foods/Foods";
-import Products from "./views/Products/Products";
+import Products from "./views/pages/Products/Products";
 import Dashboard from "./views/pages/Dashboard/Dashboard";
 import Daily from "./views/pages/Daily/Daily";
 import Activities from "./views/pages/Activities/Activities";
