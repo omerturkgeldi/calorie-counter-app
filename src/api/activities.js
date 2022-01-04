@@ -3,15 +3,7 @@ import axios from "axios"
 const BASE_URL = 'https://localhost:5001/api/';
 
 export const ENDPOINTS = {
-    PRODUCT: 'Products',
-    FOOD: 'Foods',
     ACTIVITIES: 'Activities',
-    GROUPS: 'Group',
-    USERGROUPS: 'UserGroup',
-    RELATIONSHIPTYPES: 'RelationshipType',
-    RELATIONSHIPS: 'Relationship',
-    DAILYSTEPS: 'DailySteps',
-    DAILYFOODINTAKES: 'DailyFoodIntake'
 }
 
 

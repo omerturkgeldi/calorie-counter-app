@@ -1,4 +1,6 @@
 import React from "react";
+import DailyFoodIntakesList from "../../components/DailyFoodIntakes/DailyFoodIntakesList";
+import DailyStepsList from "../../components/DailySteps/DailyStepsList";
 
 const Daily = () => {
   return (
@@ -83,6 +85,9 @@ const Daily = () => {
       <h1>Günlük</h1>
       <h1>Günlük</h1>
       <h1>Günlük</h1>
+
+      <DailyStepsList />
+      <DailyFoodIntakesList />
     </div>
   );
 };

@@ -5,84 +5,78 @@ import { success, warn, info, error } from 'tata-js/src/tata'
 import UpdateProductForm from './../Products/UpdateProductForm';
 
 
-function FoodList() {
+function UserGroups() {
 
 
-    const [foods, setFoods] = useState();
+    const [userGroups, setUserGroups] = useState();
 
 
 
     useEffect(() => {
-        createdAPIEndpoint(ENDPOINTS.FOOD).fetchAll()
+        createdAPIEndpoint(ENDPOINTS.USERGROUPS).fetchAll()
             .then(res => {
-                let foodList = res.data.map(item => ({
-                    id: item.foodId,
-                    foodName: item.foodName,
-                    kcal: item.kcal,
-                    carb: item.carb,
-                    protein: item.protein,
-                    fat: item.fat,
-                    note: item.note
+                let userGroupsList = res.data.map(item => ({
+                    id: item.id,
+                    userId: item.userId,
+                    groupId: item.groupId,
+                    relationshipTypeId: item.relationshipTypeId, 
+                    dateAdded: item.dateAdded
                 }));
-                setFoods(foodList)
+                setUserGroups(userGroupsList)
 
             })
             .catch(err => console.log(err))
-        console.log(foods)
+        console.log(userGroups)
     }, [])
 
 
     return (
         <div className="container mb-5">
-            <h1 className="mb-5">Yemek Listesi</h1>
+            <h1 className="mb-5">Grup Üyeleri Listesi</h1>
 
             <table className="table mt-5 mb-5">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Yemek İsmi</th>
-                        <th scope="col">Kalori</th>
-                        <th scope="col">Karbonhidrat</th>
-                        <th scope="col">Protein</th>
-                        <th scope="col">Yağ</th>
-                        <th scope="col">Not</th>
+                        <th scope="col">Kullanıcı ID</th>
+                        <th scope="col">Group ID</th>
+                        <th scope="col">İlişki ID</th>
+                        <th scope="col">Eklendiği Tarih</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foods && foods.map((food, index) => {
+                    {userGroups && userGroups.map((userGroup, index) => {
                         return (
-                            <tr key={food.id}>
+                            <tr key={userGroup.id}>
                                 <th scope="row">{index + 1}</th>
-                                <td>{food.foodName}</td>
-                                <td>{food.kcal}</td>
-                                <td>{food.carb == 0 ? " - " : food.carb + ` gr`}</td>
-                                <td>{food.protein == 0 ? " - " : food.protein + ` gr`}</td>
-                                <td>{food.fat == 0 ? " - " : food.fat + ` gr`}</td>
-                                {/* <td>{food.note}</td> */}
+                                <td>{userGroup.userId}</td>
+                                <td>{userGroup.groupId}</td>
+                                <td>{userGroup.relationshipTypeId}</td>
+                                <td>{userGroup.dateAdded}</td>
                                 <td>
-                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.FOOD).fetchById(food.id)
+                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.USERGROUPS).fetchById(userGroup.id)
                                         .then(res => {
                                             console.log(res.data);
                                             // <UpdateProductForm xbarcodeNo={res.data.barcodeNo}/>
                                         })
                                         .catch(err => {
                                             console.log(err);
-                                            error("Yemek Bulunamadı", "");
+                                            error("Grup İlişkisi Bulunamadı", "");
                                         })}>
                                         <MdEdit style={{ color: 'blue' }} size={22} />
                                     </a>
                                 </td>
                                 <td style={{ cursor: 'pointer' }}>
-                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.FOOD).delete(food.id)
+                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.USERGROUPS).delete(userGroup.id)
                                         .then(res => {
                                             console.log(res);
-                                            success('Başarılı!', 'Yemek başarıyla silindi.')
+                                            success('Başarılı!', 'Grup İlişkisi başarıyla silindi.')
                                         })
                                         .catch(err => {
                                             console.log(err)
-                                            error('Başarısız!', 'Yemek silinemedi.')
+                                            error('Başarısız!', 'Grup İlişkisi silinemedi.')
                                         })} >
                                         <MdDelete style={{ color: 'red' }} size={22} />
                                     </a>
@@ -96,4 +90,4 @@ function FoodList() {
     )
 }
 
-export default FoodList
+export default UserGroups

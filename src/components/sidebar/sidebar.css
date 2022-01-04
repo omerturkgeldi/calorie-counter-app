@@ -128,7 +128,7 @@ a {
 }
 
 .body-pd {
-    padding-left: calc(var(--nav-width) + 1rem);
+    margin-left: calc(var(--nav-width) + 1rem);
     transition: .5s
 }
 
@@ -151,7 +151,7 @@ a {
 
 @media screen and (min-width: 768px) {
     body {
-        margin: calc(var(--header-height) + 1rem) 0 0 0;
+        margin: calc(var(--header-height) + 3rem) 0 0 0;
         padding-left: calc(var(--nav-width) + 2rem)
     }
 

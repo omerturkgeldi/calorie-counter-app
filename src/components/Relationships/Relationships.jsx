@@ -5,84 +5,80 @@ import { success, warn, info, error } from 'tata-js/src/tata'
 import UpdateProductForm from './../Products/UpdateProductForm';
 
 
-function FoodList() {
+function Relationships() {
 
 
-    const [foods, setFoods] = useState();
+    const [relationships, setRelationships] = useState();
 
 
 
     useEffect(() => {
-        createdAPIEndpoint(ENDPOINTS.FOOD).fetchAll()
+        createdAPIEndpoint(ENDPOINTS.RELATIONSHIPS).fetchAll()
             .then(res => {
-                let foodList = res.data.map(item => ({
-                    id: item.foodId,
-                    foodName: item.foodName,
-                    kcal: item.kcal,
-                    carb: item.carb,
-                    protein: item.protein,
-                    fat: item.fat,
-                    note: item.note
+                let relationshipsList = res.data.map(item => ({
+                    id: item.id,
+                    userId_1: item.userId_1,
+                    userId_2: item.userId_2,
+                    relationshipTypeId: item.relationshipTypeId,
+                    createdAt: item.createdAt,
                 }));
-                setFoods(foodList)
+                setRelationships(relationshipsList)
 
             })
             .catch(err => console.log(err))
-        console.log(foods)
+        console.log(relationships)
     }, [])
 
 
     return (
         <div className="container mb-5">
-            <h1 className="mb-5">Yemek Listesi</h1>
+            <h1 className="mb-5">İlişkiler Listesi</h1>
 
             <table className="table mt-5 mb-5">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Yemek İsmi</th>
-                        <th scope="col">Kalori</th>
-                        <th scope="col">Karbonhidrat</th>
-                        <th scope="col">Protein</th>
-                        <th scope="col">Yağ</th>
-                        <th scope="col">Not</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">USER_1</th>
+                        <th scope="col">USER_2</th>
+                        <th scope="col">İlişki Tipi</th>
+                        <th scope="col">Tarih</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foods && foods.map((food, index) => {
+                    {relationships && relationships.map((relationship, index) => {
                         return (
-                            <tr key={food.id}>
+                            <tr key={relationship.id}>
                                 <th scope="row">{index + 1}</th>
-                                <td>{food.foodName}</td>
-                                <td>{food.kcal}</td>
-                                <td>{food.carb == 0 ? " - " : food.carb + ` gr`}</td>
-                                <td>{food.protein == 0 ? " - " : food.protein + ` gr`}</td>
-                                <td>{food.fat == 0 ? " - " : food.fat + ` gr`}</td>
-                                {/* <td>{food.note}</td> */}
+                                <td>{relationship.id}</td>
+                                <td>{relationship.userId_1}</td>
+                                <td>{relationship.userId_2}</td>
+                                <td>{relationship.relationshipTypeId}</td>
+                                <td>{relationship.createdAt}</td>
                                 <td>
-                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.FOOD).fetchById(food.id)
+                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.RELATIONSHIPS).fetchById(relationship.id)
                                         .then(res => {
                                             console.log(res.data);
                                             // <UpdateProductForm xbarcodeNo={res.data.barcodeNo}/>
                                         })
                                         .catch(err => {
                                             console.log(err);
-                                            error("Yemek Bulunamadı", "");
+                                            error("İlişki Bulunamadı", "");
                                         })}>
                                         <MdEdit style={{ color: 'blue' }} size={22} />
                                     </a>
                                 </td>
                                 <td style={{ cursor: 'pointer' }}>
-                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.FOOD).delete(food.id)
+                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.RELATIONSHIPS).delete(relationship.id)
                                         .then(res => {
                                             console.log(res);
-                                            success('Başarılı!', 'Yemek başarıyla silindi.')
+                                            success('Başarılı!', 'İlişki başarıyla silindi.')
                                         })
                                         .catch(err => {
                                             console.log(err)
-                                            error('Başarısız!', 'Yemek silinemedi.')
+                                            error('Başarısız!', 'İlişki silinemedi.')
                                         })} >
                                         <MdDelete style={{ color: 'red' }} size={22} />
                                     </a>
@@ -96,4 +92,4 @@ function FoodList() {
     )
 }
 
-export default FoodList
+export default Relationships

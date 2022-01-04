@@ -8,81 +8,72 @@ import UpdateProductForm from './../Products/UpdateProductForm';
 function FoodList() {
 
 
-    const [foods, setFoods] = useState();
+    const [activities, setActivities] = useState();
 
 
 
     useEffect(() => {
-        createdAPIEndpoint(ENDPOINTS.FOOD).fetchAll()
+        createdAPIEndpoint(ENDPOINTS.ACTIVITIES + '/getall').fetchAll()
             .then(res => {
-                let foodList = res.data.map(item => ({
-                    id: item.foodId,
-                    foodName: item.foodName,
-                    kcal: item.kcal,
-                    carb: item.carb,
-                    protein: item.protein,
-                    fat: item.fat,
-                    note: item.note
+                let activitiesList = res.data.map(item => ({
+                    activityId: item.activityId,
+                    name: item.name,
+                    specificMotion: item.specificMotion,
+                    metValue: item.metValue                    
                 }));
-                setFoods(foodList)
+                setActivities(activitiesList)
 
             })
             .catch(err => console.log(err))
-        console.log(foods)
+        console.log(activities)
     }, [])
 
 
     return (
         <div className="container mb-5">
-            <h1 className="mb-5">Yemek Listesi</h1>
+            <h1 className="mb-5">Aktivite Listesi</h1>
 
             <table className="table mt-5 mb-5">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Yemek İsmi</th>
-                        <th scope="col">Kalori</th>
-                        <th scope="col">Karbonhidrat</th>
-                        <th scope="col">Protein</th>
-                        <th scope="col">Yağ</th>
-                        <th scope="col">Not</th>
+                        <th scope="col">Aktivite İsmi</th>
+                        <th scope="col">Hareket İsmi</th>
+                        <th scope="col">MET Değeri</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foods && foods.map((food, index) => {
+                    {activities && activities.map((activity, index) => {
                         return (
-                            <tr key={food.id}>
+                            <tr key={activity.activityId}>
                                 <th scope="row">{index + 1}</th>
-                                <td>{food.foodName}</td>
-                                <td>{food.kcal}</td>
-                                <td>{food.carb == 0 ? " - " : food.carb + ` gr`}</td>
-                                <td>{food.protein == 0 ? " - " : food.protein + ` gr`}</td>
-                                <td>{food.fat == 0 ? " - " : food.fat + ` gr`}</td>
-                                {/* <td>{food.note}</td> */}
+                                <td>{activity.name}</td>
+                                <td>{activity.specificMotion}</td>
+                                <td>{activity.metValue}</td>
                                 <td>
-                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.FOOD).fetchById(food.id)
+                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.ACTIVITIES + '/getById').fetchById(activity.activityId)
                                         .then(res => {
                                             console.log(res.data);
                                             // <UpdateProductForm xbarcodeNo={res.data.barcodeNo}/>
                                         })
                                         .catch(err => {
                                             console.log(err);
-                                            error("Yemek Bulunamadı", "");
+                                            error("Aktivite Bulunamadı", "");
                                         })}>
                                         <MdEdit style={{ color: 'blue' }} size={22} />
                                     </a>
                                 </td>
                                 <td style={{ cursor: 'pointer' }}>
-                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.FOOD).delete(food.id)
+                                    <a onClick={() => createdAPIEndpoint(ENDPOINTS.ACTIVITIES + "/Remove/").delete(activity.activityId)
                                         .then(res => {
                                             console.log(res);
-                                            success('Başarılı!', 'Yemek başarıyla silindi.')
+                                            success('Başarılı!', 'Aktivite başarıyla silindi.')
                                         })
                                         .catch(err => {
                                             console.log(err)
-                                            error('Başarısız!', 'Yemek silinemedi.')
+                                            error('Başarısız!', 'Aktivite silinemedi.')
                                         })} >
                                         <MdDelete style={{ color: 'red' }} size={22} />
                                     </a>

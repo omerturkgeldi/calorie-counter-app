@@ -58,11 +58,12 @@ function FoodForm() {
 
     return (
         <div>
+        <button style={{color:'red',padding:'10px'}}>SDGdg</button>
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <h1>Yemek Ekle</h1>
-                        <form onSubmit={handleSubmit} autoComplete="off" className="mt-5 mb-5 p-5" style={{ border: "3px solid green", borderRadius: '15px' }}>
+                        <form onSubmit={handleSubmit} autoComplete="off" className="mt-5 mb-5 p-5" style={{ border: "3px solid blue", borderRadius: '15px' }}>
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mb-3">
