@@ -30,8 +30,10 @@ function FoodForm() {
                         carb: apiResult.carb,
                         fat : apiResult.fat,
                         protein : apiResult.protein,
-                        note: apiResult.note
+                        urlName : apiResult.urlName
+                        // note: apiResult.note
                     }
+                    console.log("newResult",newResult);
 
                     if (values.kcal != null) {
                         createdAPIEndpoint(ENDPOINTS.FOOD).create(newResult)

@@ -3,7 +3,7 @@ import { createdAPIEndpoint, ENDPOINTS } from '../../api'
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { success, warn, info, error } from 'tata-js/src/tata'
 import UpdateProductForm from './../Products/UpdateProductForm';
-
+import { Link } from 'react-router-dom';
 
 function GroupList() {
 
@@ -19,7 +19,7 @@ function GroupList() {
                     id: item.id,
                     groupName: item.groupName,
                     createdAt: item.createdAt,
-                    creatorId: item.creatorId, 
+                    creatorId: item.creatorId,
                 }));
                 setGroups(groupsList)
 
@@ -31,6 +31,14 @@ function GroupList() {
 
     return (
         <div className="container mb-5">
+
+            <Link to="/denemee">
+                <span>
+                    aktivititelerrr
+                </span>
+            </Link>
+
+
             <h1 className="mb-5">Gruplar Listesi</h1>
 
             <table className="table mt-5 mb-5">

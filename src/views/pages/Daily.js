@@ -1,10 +1,41 @@
 import React from "react";
+import UserActivities from "../../components/Activities/UserActivities";
 import DailyFoodIntakesList from "../../components/DailyFoodIntakes/DailyFoodIntakesList";
 import DailyStepsList from "../../components/DailySteps/DailyStepsList";
 
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux'
+import { toYesterday, toTomorrow, setToday } from '../../stores/todaysDate'
+
+
 const Daily = () => {
+
+
+  const today = useSelector(state => state.todaysDate.today)
+
+  const dispatch = useDispatch()
+
+
   return (
     <div className="container">
+
+      <h1>{new Date(today).toLocaleDateString()}</h1>
+      <h1>{new Date(today).toLocaleDateString()}</h1>
+      <h1>{new Date(today).toLocaleDateString()}</h1>
+      <h1>{new Date(today).toLocaleDateString()}</h1>
+      <h1>{today}</h1>
+      <h1>{today}</h1>
+
+      <div>
+        <button onClick={() => dispatch(toYesterday())}>Arttır (+)</button>
+        <button onClick={() => dispatch(toTomorrow())}>Azalt (-)</button>
+        <button onClick={() => dispatch(setToday())}>4 Arttır</button>
+      </div>
+
+
+
+
+
       <div className="mt-3 row">
         <div className="col-md-6">
           <div className="card" style={{ width: "18rem" }}>

@@ -36,7 +36,7 @@ const Sidebar = props => {
                     <img src="https://i.imgur.com/hczKIze.jpg" alt="" />
                 </div> */}
 
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Ayarlar</button>
+                <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Ayarlar</button>
 
 
             </header>

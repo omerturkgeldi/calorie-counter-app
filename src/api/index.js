@@ -11,7 +11,9 @@ export const ENDPOINTS = {
     RELATIONSHIPTYPES: 'RelationshipType',
     RELATIONSHIPS: 'Relationship',
     DAILYSTEPS: 'DailySteps',
-    DAILYFOODINTAKES: 'DailyFoodIntake'
+    DAILYFOODINTAKES: 'DailyFoodIntake',
+    DAILYPRODUCTINTAKES: 'DailyProductIntake',
+    DAILYACTIVITIES: 'DailyActivity'
 }
 
 

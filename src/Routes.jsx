@@ -18,7 +18,7 @@ const Routes = () => {
       <Route path="/gunluk" component={Daily} />
       <Route path="/aktiviteler" component={Activities} />
       <Route path="/sosyal" component={Social} />
-
+      <Route path="/denemee" component={Activities} />
     </Switch>
   );
 };
