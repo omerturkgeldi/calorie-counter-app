@@ -4,9 +4,9 @@ import DateSelector from '../../components/DateSelector'
 import UserFoods from '../../components/Foods/UserFoods'
 
 
-
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
+import DailySummary from '../../components/DailySummary';
 
 
 
@@ -18,9 +18,8 @@ const Dashboard = () => {
 
 
     return (
-        <div>
-            <h2>{totalCalorieBurned}</h2>
-            <h2>{totalCalorieIntake}</h2>
+        <div className='container col-xl-8'>
+            <DailySummary />
             <DateSelector />
             <UserActivities />
             <br></br>

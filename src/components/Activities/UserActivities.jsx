@@ -10,12 +10,14 @@ import { success, warn, info, error } from 'tata-js/src/tata'
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
+import { setCalorieBurned } from '../../stores/calories';
 
 
 function UserActivities() {
 
 
     const today = useSelector(state => state.todaysDate.today)
+    const calorieBurned = useSelector(state => state.calories.calorieBurned)
     const dispatch = useDispatch()
 
 
@@ -77,6 +79,15 @@ function UserActivities() {
                     weight: item.weight,
                     metValue: item.metValue
                 }));
+
+                var totalKcalBurned = 0
+
+                activityList && activityList.map((item) => {
+                    totalKcalBurned += Math.round(((item.metValue * 3.5 * item.weight) / 200 * item.minutes).toFixed(2))
+                })
+
+                dispatch(setCalorieBurned(Math.round(totalKcalBurned.toFixed(2))));
+
                 setTodaysActivities(activityList)
             })
             .catch(err => console.log(err))
@@ -153,8 +164,8 @@ function UserActivities() {
 
                     {totalBurnedCalories && totalBurnedCalories >= 0 ?
                         <div className='row'>
-                            <h4 className='col-md-9 text-end'>Bugün yakılan kalori: </h4>
-                            <h3 className='col-md-3 text-end'> <span className='text-danger'>{totalBurnedCalories.toFixed(2)}</span> kcal</h3>
+                            <h5 className='col-md-9 text-end'>Bugün yakılan kalori: </h5>
+                            <h5 className='col-md-3 text-end'> <span className='text-danger'>{calorieBurned}</span> kcal</h5>
                         </div>
                         : <></>
                     }

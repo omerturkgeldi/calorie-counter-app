@@ -11,20 +11,19 @@ import { success, warn, info, error } from 'tata-js/src/tata'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 
-import { setCalorieIntake, setCalorieBurned } from '../../stores/calories'
+import { setCalorieIntake, setCalorieBurned, setTotalCarb, setTotalFat, setTotalProtein } from '../../stores/calories'
 import { toYesterday, toTomorrow, setToday } from '../../stores/todaysDate'
 
 
 function UserFoods() {
 
 
-    var totalCaloriesTaken = 0;
-
-    var totalCarbTaken = 0;
-    var totalFatTaken = 0;
-    var totalProteinTaken = 0;
-
     const today = useSelector(state => state.todaysDate.today)
+    const calorieIntake = useSelector(state => state.calories.calorieIntake)
+    const carbTotal = useSelector(state => state.calories.totalCarb)
+    const fatTotal = useSelector(state => state.calories.totalFat)
+    const proteinTotal = useSelector(state => state.calories.totalProtein)
+
     const dispatch = useDispatch()
 
 
@@ -78,7 +77,24 @@ function UserFoods() {
                     date: item.date
                 }));
                 setTodaysCalories(caloriesList)
-                dispatch(setCalorieIntake(totalFoodsCalories));
+
+                var totalKcal = 0
+                var totalCarb = 0
+                var totalFat = 0
+                var totalProtein = 0
+
+                caloriesList && caloriesList.map((item) => {
+                    totalKcal += Math.round((item.kcal * item.portionSize / 100))
+                    totalCarb += item.carb
+                    totalFat += item.fat
+                    totalProtein += item.protein
+                })
+
+
+                dispatch(setCalorieIntake(Math.round(totalKcal.toFixed(2))));
+                dispatch(setTotalCarb(Math.round(totalCarb.toFixed(2))))
+                dispatch(setTotalFat(Math.round(totalFat.toFixed(2))))
+                dispatch(setTotalProtein(Math.round(totalProtein.toFixed(2))))
 
             })
             .catch(err => console.log(err))
@@ -135,17 +151,6 @@ function UserFoods() {
                             <tbody>
                                 {todaysCalories.map((singleCalorie) => {
 
-                                    var takenCalories = (singleCalorie.kcal * singleCalorie.portionSize / 100).toFixed(2);
-
-                                    totalCarbTaken += parseFloat(singleCalorie.carb)
-                                    totalFatTaken += parseFloat(singleCalorie.fat)
-                                    totalProteinTaken += parseFloat(singleCalorie.protein)
-
-
-                                    totalCaloriesTaken += parseFloat(takenCalories)
-
-
-                                    console.log("totalCaloriesTaken", totalCaloriesTaken)
 
                                     return (
                                         <tr key={(singleCalorie.id).toString() + (singleCalorie.type == true ? 1 : 0).toString()}>
@@ -165,35 +170,33 @@ function UserFoods() {
                                         </tr>
                                     )
                                 })}
-                                {() => {
-                                    dispatch(setCalorieIntake(totalCaloriesTaken.toFixed(2)))
-                                }}
+
                             </tbody>
 
                         </table>
                         : <h2 className='text-danger text-center mt-5 mb-5'>Gösterilecek yemek bulunamadı!</h2>
                     }
 
-                    {totalCaloriesTaken && totalCaloriesTaken >= 0 ?
+                    {calorieIntake && calorieIntake >= 0 ?
                         <>
                             <div className='row'>
-                                <h4 className='col-md-9 text-end'>Bugün aldığınız kalori: </h4>
-                                <h3 className='col-md-3 text-end'> <span className='text-danger'>{totalCaloriesTaken.toFixed(2)}</span> kcal</h3>
+                                <h5 className='col-md-9 text-end'>Bugün aldığınız kalori: </h5>
+                                <h5 className='col-md-3 text-end'> <span className='text-danger'>{calorieIntake}</span> kcal</h5>
                             </div>
 
                             <div className='row'>
-                                <h4 className='col-md-9 text-end'>Bugün aldığınız karbonhidrat: </h4>
-                                <h3 className='col-md-3 text-end'> <span className='text-danger'>{totalCarbTaken.toFixed(2)}</span> gr</h3>
+                                <h5 className='col-md-9 text-end'>Bugün aldığınız karbonhidrat: </h5>
+                                <h5 className='col-md-3 text-end'> <span className='text-danger'>{carbTotal}</span> gr</h5>
                             </div>
 
                             <div className='row'>
-                                <h4 className='col-md-9 text-end'>Bugün aldığınız yağ: </h4>
-                                <h3 className='col-md-3 text-end'> <span className='text-danger'>{totalFatTaken.toFixed(2)}</span> gr</h3>
+                                <h5 className='col-md-9 text-end'>Bugün aldığınız yağ: </h5>
+                                <h5 className='col-md-3 text-end'> <span className='text-danger'>{fatTotal}</span> gr</h5>
                             </div>
 
                             <div className='row'>
-                                <h4 className='col-md-9 text-end'>Bugün aldığınız protein: </h4>
-                                <h3 className='col-md-3 text-end'> <span className='text-danger'>{totalProteinTaken.toFixed(2)}</span> gr</h3>
+                                <h5 className='col-md-9 text-end'>Bugün aldığınız protein: </h5>
+                                <h5 className='col-md-3 text-end'> <span className='text-danger'>{proteinTotal}</span> gr</h5>
                             </div>
                         </>
                         : <></>

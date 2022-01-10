@@ -78,6 +78,12 @@ const Sidebar = props => {
                                     Aktiviteler
                                 </span>
                             </Link>
+                            <Link to="/profil" className="nav_link">
+                                <i className='bx bx-bolt-circle nav_icon'></i>
+                                <span className="nav_name">
+                                    Profilim
+                                </span>
+                            </Link>
                             <Link to="/sosyal" className="nav_link">
                                 <i className='bx bx-cube-alt nav_icon'></i>
                                 <span className="nav_name">

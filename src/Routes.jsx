@@ -8,6 +8,7 @@ import Dashboard from "./views/pages/Dashboard";
 import Daily from "./views/pages/Daily";
 import Activities from "./views/pages/Activities";
 import Social from "./views/pages/Social";
+import Profile from "./views/pages/Profile";
 
 const Routes = () => {
   return (
@@ -18,6 +19,7 @@ const Routes = () => {
       <Route path="/gunluk" component={Daily} />
       <Route path="/aktiviteler" component={Activities} />
       <Route path="/sosyal" component={Social} />
+      <Route path="/profil" component={Profile} />
       <Route path="/denemee" component={Activities} />
     </Switch>
   );
