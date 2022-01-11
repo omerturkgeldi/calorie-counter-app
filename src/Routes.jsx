@@ -9,6 +9,7 @@ import Daily from "./views/pages/Daily";
 import Activities from "./views/pages/Activities";
 import Social from "./views/pages/Social";
 import Profile from "./views/pages/Profile";
+import UserVsFriend from "./views/pages/UserVsFriend";
 
 const Routes = () => {
   return (
@@ -21,6 +22,7 @@ const Routes = () => {
       <Route path="/sosyal" component={Social} />
       <Route path="/profil" component={Profile} />
       <Route path="/denemee" component={Activities} />
+      <Route path="/arkadas-ile-karsilastirma" component={UserVsFriend} />
     </Switch>
   );
 };

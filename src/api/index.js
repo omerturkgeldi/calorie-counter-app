@@ -19,7 +19,8 @@ export const ENDPOINTS = {
 
 export const createdAPIEndpoint = endpoint => {
 
-    let url = BASE_URL + endpoint + '/';
+    // let url = BASE_URL + endpoint + '/';
+    let url = BASE_URL + endpoint;
 console.log(url)
     return{
         fetchAll: () => axios.get(url),

@@ -15,7 +15,7 @@ import { setCalorieIntake, setCalorieBurned, setTotalCarb, setTotalFat, setTotal
 import { toYesterday, toTomorrow, setToday } from '../../stores/todaysDate'
 
 
-function UserFoods() {
+function UserFoods({ idOfTheUser }) {
 
 
     const today = useSelector(state => state.todaysDate.today)
@@ -57,7 +57,7 @@ function UserFoods() {
     useEffect(() => {
 
         let myProps = {
-            id: "ed3e6bea-fd43-4323-8d9c-1d8d848eb3ed",
+            id: idOfTheUser,
             date: new Date(today).toJSON(),
         }
         createdAPIEndpoint(ENDPOINTS.DAILYPRODUCTS + "/SearchByUserAndDate").fetchByDateAndUserId(myProps)
@@ -131,7 +131,10 @@ function UserFoods() {
 
 
             <div>
-                <h1>Günün yemekleri</h1>
+
+
+                <h3 className='mt-5 mb-2'>Yediklerim</h3>
+                <hr />
 
                 <div className='col-xl-12 col-12 p-2'>
                     {todaysCalories && todaysCalories.length != 0 ?

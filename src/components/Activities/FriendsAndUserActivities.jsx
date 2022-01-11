@@ -13,50 +13,17 @@ import { useDispatch } from 'react-redux'
 import { setCalorieBurned } from '../../stores/calories';
 
 
-function UserActivities({ idOfTheUser }) {
+
+function FriendsAndUserActivities({ idOfTheUser }) {
 
     const today = useSelector(state => state.todaysDate.today)
     const calorieBurned = useSelector(state => state.calories.calorieBurned)
     const dispatch = useDispatch()
 
-
-
     var totalBurnedCalories = 0;
 
+    var totalKcalBurned = 0
     const [todaysActivities, setTodaysActivities] = useState();
-    const [showModal, setShowModal] = useState(false);
-    const [idToBeDeleted, setIdToBeDeleted] = useState();
-
-    const handleDelete = () => {
-
-        createdAPIEndpoint(ENDPOINTS.DAILYACTIVITIES + "/Remove/" + idToBeDeleted).delete(idToBeDeleted)
-            .then(res => {
-                setShowModal(false);
-                success('Başarılı!', 'Aktivite başarıyla silindi.')
-            })
-            .catch(err => {
-                console.log(err)
-                setShowModal(false);
-                error('Başarısız!', 'Aktivite silinemedi.')
-            })
-    }
-
-
-    const handleShow = (id) => {
-        setShowModal(true)
-        setIdToBeDeleted(id)
-
-    }
-
-
-    // const navigateToYesterday = () => {
-    //     setToday(new Date(today - 24 * 60 * 60 * 1000).getTime())
-    // }
-
-    // const navigateToTomorrow = () => {
-    //     setToday(new Date(today + 24 * 60 * 60 * 1000).getTime())
-    // }
-
 
 
 
@@ -79,13 +46,6 @@ function UserActivities({ idOfTheUser }) {
                     metValue: item.metValue
                 }));
 
-                var totalKcalBurned = 0
-
-                activityList && activityList.map((item) => {
-                    totalKcalBurned += Math.round(((item.metValue * 3.5 * item.weight) / 200 * item.minutes).toFixed(2))
-                })
-
-                dispatch(setCalorieBurned(Math.round(totalKcalBurned.toFixed(2))));
 
                 setTodaysActivities(activityList)
             })
@@ -95,30 +55,8 @@ function UserActivities({ idOfTheUser }) {
 
 
     return (
-
         <>
-
-            <Modal show={showModal} onHide={() => setShowModal(false)} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Aktivite sil</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h5>Bu aktiviteyi silmek istediğinize emin misiniz?</h5>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
-                        Kapat
-                    </Button>
-                    <Button type="submit" variant="danger" onClick={handleDelete}
-                    >
-                        Sil
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
             <div>
-
-
 
                 <h3 className='mt-5 mb-2'>Aktiviteler</h3>
                 <hr />
@@ -132,27 +70,19 @@ function UserActivities({ idOfTheUser }) {
                                     <th scope="col p-3">Aktivite</th>
                                     <th scope="col p-3">Süre (dk)</th>
                                     <th scope="col p-3">Yakılan Kalori</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {todaysActivities.map((singleActivity) => {
 
                                     var burnedCalories = ((singleActivity.metValue * 3.5 * singleActivity.weight) / 200 * singleActivity.minutes).toFixed(2);
-                                    totalBurnedCalories += parseFloat(burnedCalories);
+                                    totalBurnedCalories += parseInt(burnedCalories);
 
                                     return (
                                         <tr key={singleActivity.id + (isNaN(parseInt(singleActivity.type)) ? 0 : parseInt(singleActivity.type))}>
                                             <td className='p-4'>{singleActivity.specificMotion}</td>
                                             <td className='p-4'>{singleActivity.minutes} dk</td>
                                             <td className='p-4'>{burnedCalories}  kcal</td>
-                                            <td className='p-4'>
-                                                <button className='btn'
-                                                    onClick={() => handleShow(singleActivity.id)}
-                                                >
-                                                    <HighlightOffIcon />
-                                                </button>
-                                            </td>
                                         </tr>
                                     )
 
@@ -165,7 +95,7 @@ function UserActivities({ idOfTheUser }) {
                     {totalBurnedCalories && totalBurnedCalories >= 0 ?
                         <div className='row'>
                             <h5 className='col-md-9 text-end'>Bugün yakılan kalori: </h5>
-                            <h5 className='col-md-3 text-end'> <span className='text-danger'>{calorieBurned}</span> kcal</h5>
+                            <h5 className='col-md-3 text-end'> <span className='text-danger'>{totalBurnedCalories}</span> kcal</h5>
                         </div>
                         : <></>
                     }
@@ -175,4 +105,4 @@ function UserActivities({ idOfTheUser }) {
     )
 }
 
-export default UserActivities
+export default FriendsAndUserActivities
